@@ -1,5 +1,8 @@
 public class LinkedList {
-    public static class Node{
+    // Create a Node class to store data and reference to next element(Node)
+    // It’s static because we don’t need a LinkedList object to create a Node. 
+    // (It doesn't depend on any outer instance.) Its just like a simple data holder
+    private static class Node{
         int data;
         Node next;
 
@@ -9,10 +12,13 @@ public class LinkedList {
         }
     }
 
+    // Why Private? -> We are encapsulating the inner structure. 
+    // Outside classes shouldn’t mess with internals of the linked list directly.
     private Node head;
     private Node tail;
     private int size;
 
+    // Initializes a fresh LinkedList with no elements.
     public LinkedList(){
         this.head = null;
         this.tail = null;
