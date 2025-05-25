@@ -51,7 +51,8 @@ public class StringBuilder_JCF {
         System.out.println("After setCharAt: " + sb1); // Hello-Java
 
         // 12. substring()
-        System.out.println("Substring(6, 10): " + sb1.substring(6, 10)); // -Jav
+        System.out.println("the string is " + sb1);
+        System.out.println("Substring(6, 10): " + sb1.substring(6, 10)); // -ava
 
         // 13. capacity()
         System.out.println("Current capacity: " + sb1.capacity());
