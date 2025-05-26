@@ -1,4 +1,5 @@
 public class Heap {
+    // -------------------- MAX HEAP ------------------------
     public static class MaxHeap {
         // Get the variables
         private int[] nums;
@@ -113,6 +114,7 @@ public class Heap {
         }
     }
 
+    // -------------------- MIN HEAP ------------------------
     public static class MinHeap {
         private int[] nums;
         private int capacity;
@@ -203,7 +205,8 @@ public class Heap {
                 nums[i] = arr[i];
             }
 
-            for(int i=getParent(nums.length-1); i>=0; i--){
+            idx = nums.length;
+            for(int i=getParent(idx-1); i>=0; i--){
                 heapifyDown(i);
             }
         }
@@ -214,6 +217,55 @@ public class Heap {
             nums[j] = temp;
         }
     }
+
+    // -------------------- PRIORITY QUEUE ------------------------
+    public static class PriorityQueue {
+        private MinHeap minHeap;
+        private MaxHeap maxHeap;
+        private boolean isMin;
+
+        public PriorityQueue(int capacity) {
+            this.isMin = true;
+            this.minHeap = new MinHeap(capacity);
+        }
+
+        public PriorityQueue(int capacity, String order) {
+            if ("reverse".equalsIgnoreCase(order)) {
+                this.isMin = false;
+                this.maxHeap = new MaxHeap(capacity);
+            } else {
+                this.isMin = true;
+                this.minHeap = new MinHeap(capacity);
+            }
+        }
+
+        public void insert(int val) {
+            if (isMin) minHeap.insert(val);
+            else maxHeap.insert(val);
+        }
+
+        public int peek() {
+            return isMin ? minHeap.peek() : maxHeap.peek();
+        }
+
+        public int remove() {
+            return isMin ? minHeap.remove() : maxHeap.remove();
+        }
+
+        public boolean isEmpty() {
+            return isMin ? minHeap.isEmpty() : maxHeap.isEmpty();
+        }
+
+        public boolean isFull() {
+            return isMin ? minHeap.isFull() : maxHeap.isFull();
+        }
+
+        public void buildHeap(int[] arr) {
+            if (isMin) minHeap.buildHeap(arr);
+            else maxHeap.buildHeap(arr);
+        }
+    }
+
     public static void main(String[] args) {
 
         MaxHeap heap = new MaxHeap(5);
@@ -236,5 +288,25 @@ public class Heap {
         System.out.println(h.peek());
         System.out.println(h.remove());
         System.out.println(h.remove());
+
+        // MinHeap via PriorityQueue
+        PriorityQueue pq1 = new PriorityQueue(5);
+        pq1.insert(4);
+        pq1.insert(2);
+        pq1.insert(10);
+        System.out.println("MinHeap PQ peek: " + pq1.peek()); // 2
+
+        // MaxHeap via PriorityQueue
+        PriorityQueue pq2 = new PriorityQueue(5, "reverse");
+        pq2.insert(4);
+        pq2.insert(2);
+        pq2.insert(10);
+        System.out.println("MaxHeap PQ peek: " + pq2.peek()); // 10
+
+        // Test buildHeap on MinHeap PQ
+        pq1.buildHeap(new int[]{5, 1, 8, 0, 3});
+        System.out.println("After buildHeap, MinHeap PQ peek: " + pq1.peek()); // 0
+        System.out.println("Remove 1: " + pq1.remove()); // 0
+        System.out.println("Remove 2: " + pq1.remove()); // 1
     }
 }
