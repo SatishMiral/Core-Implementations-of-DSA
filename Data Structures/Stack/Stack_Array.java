@@ -1,3 +1,4 @@
+package Stack;
 public class Stack_Array {
     public static class Stack{
         private int[] arr;

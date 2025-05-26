@@ -1,3 +1,4 @@
+package Math;
 import java.lang.Math;
 
 public class Math_JCF {

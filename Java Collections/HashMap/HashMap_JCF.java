@@ -1,3 +1,4 @@
+package HashMap;
 // Imports
 import java.util.HashMap;
 import java.util.Map;

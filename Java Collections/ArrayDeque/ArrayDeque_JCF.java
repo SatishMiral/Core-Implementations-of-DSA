@@ -1,3 +1,4 @@
+package ArrayDeque;
 import java.util.ArrayDeque;
 // Core Deque Methods
 // Category	Methods

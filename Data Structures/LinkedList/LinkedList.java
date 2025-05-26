@@ -1,3 +1,4 @@
+package LinkedList;
 public class LinkedList {
     // Create a Node class to store data and reference to next element(Node)
     // It’s static because we don’t need a LinkedList object to create a Node. 

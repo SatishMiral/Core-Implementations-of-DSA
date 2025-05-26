@@ -1,3 +1,4 @@
+package StringBuilder;
 import java.lang.StringBuilder; // Optional, auto-imported with java.lang
 public class StringBuilder_JCF {
     public static void main(String[] args) {

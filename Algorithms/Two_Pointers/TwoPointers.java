@@ -1,3 +1,4 @@
+package Two_Pointers;
 public class TwoPointers {
     public static void main(String[] args) {
         int[] nums = {1,5,4,3,4,5};
