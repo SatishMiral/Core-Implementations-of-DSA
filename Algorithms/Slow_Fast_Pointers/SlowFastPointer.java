@@ -1,4 +1,3 @@
-package Slow_Fast_Pointers;
 public class SlowFastPointer {
     public static class LinkedList {
         public static class Node {
