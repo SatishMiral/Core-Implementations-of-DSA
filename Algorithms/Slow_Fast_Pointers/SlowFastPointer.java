@@ -1,3 +1,4 @@
+
 public class SlowFastPointer {
     public static class LinkedList {
         public static class Node {
