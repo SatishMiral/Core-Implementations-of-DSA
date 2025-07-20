@@ -1,0 +1,65 @@
+public class DisJointSetDS {
+    
+    // Static nested class so we can use it in main
+    public static class DisJointSet {
+        int[] rank;
+        int[] parent;
+
+        DisJointSet(int n) {
+            rank = new int[n + 1];
+            parent = new int[n + 1];
+
+            for (int i = 0; i <= n; i++) {
+                rank[i] = 0;      // initially all ranks are 0
+                parent[i] = i;    // every node is its own parent
+            }
+        }
+
+        // Find Ultimate Parent with Path Compression
+        public int findUPar(int node) {
+            if (node == parent[node]) return node;
+
+            return parent[node] = findUPar(parent[node]); // Path compression
+        }
+
+        // Union by Rank
+        public void unionByRank(int u, int v) {
+            int pu = findUPar(u);
+            int pv = findUPar(v);
+
+            if (pu == pv) return; // Already in same set
+
+            if (rank[pu] > rank[pv]) {
+                parent[pv] = pu;
+            } else if (rank[pv] > rank[pu]) {
+                parent[pu] = pv;
+            } else {
+                parent[pv] = pu;
+                rank[pu]++;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        DisJointSet dj = new DisJointSet(7);
+        dj.unionByRank(1, 2);
+        dj.unionByRank(2, 3);
+        dj.unionByRank(4, 5);
+        dj.unionByRank(6, 7);
+        dj.unionByRank(5, 6);
+
+        if (dj.findUPar(3) == dj.findUPar(7)) {
+            System.out.println("Same");
+        } else {
+            System.out.println("Not same");
+        }
+
+        dj.unionByRank(3, 7);
+
+        if (dj.findUPar(3) == dj.findUPar(7)) {
+            System.out.println("Same");
+        } else {
+            System.out.println("Not same");
+        }
+    }
+}
