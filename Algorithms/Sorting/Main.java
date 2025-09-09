@@ -66,10 +66,94 @@ public class Main {
         printArray(nums);
     }
 
+    // -------------- Merge Sort ------------------
+    // Divide and Merge
+    public static void mergeSort(int[] nums, int low, int high){
+        if(low >= high){
+            return;
+        }
+        int mid = (high + low) / 2;
+        mergeSort(nums, low, mid);
+        mergeSort(nums, mid+1, high);
+        merge(nums, low, mid, high);
+    }
+
+    public static void merge(int[] nums, int low, int mid, int high){
+        int left = low;
+        int right = mid + 1;
+        int[] temp = new int[high - low + 1];
+        int k = 0;
+
+        while(left <= mid && right <= high){
+            if(nums[left] <= nums[right]){
+                temp[k++] = nums[left++];
+            }
+            else{
+                temp[k++] = nums[right++];
+            }
+        }
+
+        while (left <= mid) {
+            temp[k++] = nums[left++];
+        }
+        while (right <= high) {
+            temp[k++] = nums[right++];
+        }
+
+        // Copy sorted values back to nums
+        for (int i = 0; i < temp.length; i++) {
+            nums[low + i] = temp[i];
+        }
+    }
+
+    // -------------- Quick Sort ------------------
+    // Pick a Pivot and Place it in its correct place in the array
+    public static void quickSort(int[] nums, int low, int high){
+        if(low < high){
+            int pIndex = partition(nums, low, high);
+            quickSort(nums, low, pIndex-1);
+            quickSort(nums, pIndex+1, high);
+        }
+    }
+
+    public static int partition(int[] nums, int low, int high) {
+    int pivot = nums[low]; 
+    int i = low;
+    int j = high;
+
+    while (i < j) {
+        while (i <= high && nums[i] <= pivot) {
+            i++;
+        }
+        while (j >= low && nums[j] > pivot) {
+            j--;
+        }
+        if (i < j) {
+            swap(nums, i, j);
+        }
+    }
+
+    // place pivot in correct position
+    swap(nums, low, j);
+
+    return j;
+}
+
+    public static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+
     public static void main(String[] args) {
         int[] nums = {5,8,6,7,2};
-        selectionSort(nums);
-        bubbleSort(nums);
-        insertionSort(nums);
+        // selectionSort(nums);
+        // bubbleSort(nums);
+        // insertionSort(nums);
+        // mergeSort(nums, 0, nums.length-1);
+        // printArray(nums);
+        quickSort(nums, 0, nums.length-1);
+        printArray(nums);
     }
 }
