@@ -1,4 +1,4 @@
-package Algorithms.Sorting;
+// package Algorithms.Sorting;
 
 public class Main {
     public static void printArray(int[] nums){
@@ -27,6 +27,26 @@ public class Main {
         printArray(nums);
     }
 
+    // -------------- Recursive Selection Sort ------------------
+    public static void recSelectionSort(int[] nums, int i, int n) {
+        // Base Case
+        if (i == n - 1) return;
+
+        // Find the index of the minimum element in the remaining array
+        int minIdx = i;
+        for (int j = i + 1; j < n; j++) {
+            if (nums[j] < nums[minIdx]) {
+                minIdx = j;
+            }
+        }
+
+        // Swap the found minimum with the first element
+        swap(nums, i, minIdx);
+
+        // Recursively call for the rest of the array
+        recSelectionSort(nums, i + 1, n);
+    }
+
     // -------------- Bubble Sort ------------------
     // Pushes the max element to the last index
     public static void bubbleSort(int[] nums){
@@ -49,6 +69,26 @@ public class Main {
         printArray(nums);
     }
 
+    // -------------- Recursive Bubble Sort ------------------
+    public static void recBubbleSort(int[] nums, int n){
+        // Base Case
+        if(n == 1) return;
+        boolean didSwap = false;
+
+        for(int i=0; i<=n-2; i++){
+            if(nums[i] > nums[i+1]){
+                swap(nums, i, i+1);
+                didSwap = true;
+            }
+        }
+
+        if(!didSwap){
+            return;
+        }
+
+        recBubbleSort(nums, n-1);
+    }
+
     // -------------- Insertion Sort ------------------
     // Takes an element and places it in its correct position
     public static void insertionSort(int[] nums){
@@ -64,6 +104,20 @@ public class Main {
         }
 
         printArray(nums);
+    }
+
+    // -------------- Recursive Insertion Sort ------------------
+    public static void recInsertionSort(int[] nums, int i, int n){
+        // Base Case: i == n.
+        if (i == n) return;
+
+        int j = i;
+        while (j > 0 && nums[j - 1] > nums[j]) {
+            swap(nums, j-1, j);
+            j--;
+        }
+
+        recInsertionSort(nums, i+1, n);
     }
 
     // -------------- Merge Sort ------------------
@@ -117,27 +171,27 @@ public class Main {
     }
 
     public static int partition(int[] nums, int low, int high) {
-    int pivot = nums[low]; 
-    int i = low;
-    int j = high;
+        int pivot = nums[low]; 
+        int i = low;
+        int j = high;
 
-    while (i < j) {
-        while (i <= high && nums[i] <= pivot) {
-            i++;
+        while (i < j) {
+            while (i <= high && nums[i] <= pivot) {
+                i++;
+            }
+            while (j >= low && nums[j] > pivot) {
+                j--;
+            }
+            if (i < j) {
+                swap(nums, i, j);
+            }
         }
-        while (j >= low && nums[j] > pivot) {
-            j--;
-        }
-        if (i < j) {
-            swap(nums, i, j);
-        }
+
+        // place pivot in correct position
+        swap(nums, low, j);
+
+        return j;
     }
-
-    // place pivot in correct position
-    swap(nums, low, j);
-
-    return j;
-}
 
     public static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
@@ -148,12 +202,17 @@ public class Main {
 
     public static void main(String[] args) {
         int[] nums = {5,8,6,7,2};
+        int n = nums.length;
         // selectionSort(nums);
         // bubbleSort(nums);
         // insertionSort(nums);
-        // mergeSort(nums, 0, nums.length-1);
+        // mergeSort(nums, 0, n-1);
         // printArray(nums);
-        quickSort(nums, 0, nums.length-1);
+        // quickSort(nums, 0, n-1);
+        // printArray(nums);
+        // recBubbleSort(nums, n);
+        // recSelectionSort(nums, 0, n);
+        recInsertionSort(nums, 1, n);
         printArray(nums);
     }
 }
