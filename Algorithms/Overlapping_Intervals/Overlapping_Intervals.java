@@ -1,4 +1,4 @@
-package Overlapping_Intervals;
+package Algorithms.Overlapping_Intervals;
 
 import java.util.ArrayList;
 import java.util.List;

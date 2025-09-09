@@ -1,4 +1,4 @@
-package LL_In_Place_Reversal;
+package Algorithms.LL_In_Place_Reversal;
 public class LinkedList {
     private static class Node {
         int data;

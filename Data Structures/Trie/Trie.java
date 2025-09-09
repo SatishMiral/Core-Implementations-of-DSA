@@ -27,7 +27,7 @@ public class Trie {
             if(curr.children[index] == null){
                 curr.children[index] = new TrieNode();
             }
-            // If child exist then just move curr to its child
+            // move curr to its child
             curr = curr.children[index];
         }
         // End of word 

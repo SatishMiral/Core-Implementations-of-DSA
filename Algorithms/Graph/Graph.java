@@ -1,3 +1,4 @@
+package Algorithms.Graph;
 import java.util.*;
 
 public class Graph {

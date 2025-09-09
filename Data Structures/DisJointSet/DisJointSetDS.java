@@ -1,5 +1,4 @@
 public class DisJointSetDS {
-    
     // Static nested class so we can use it in main
     public static class DisJointSet {
         int[] rank;
