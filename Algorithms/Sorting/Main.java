@@ -189,7 +189,10 @@ public class Main {
 
         // place pivot in correct position
         swap(nums, low, j);
+<<<<<<< HEAD
 
+=======
+>>>>>>> d7d9465 (Add HashSet JCF)
         return j;
     }
 
