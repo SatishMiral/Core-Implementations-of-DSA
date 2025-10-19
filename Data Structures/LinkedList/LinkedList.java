@@ -181,17 +181,42 @@ public class LinkedList {
         head = zeroHead.next;
     }
 
+    // Add one to a Number represented by LL
+    public void addOne(){
+        int carry = 1;
+        this.reverse();
+
+        Node temp = head;
+        while(temp != null){
+            temp.data += carry;
+
+            if(temp.data < 10){
+                carry = 0;
+                break;
+            }
+
+            temp.data = 0;
+            carry = 1;
+            temp = temp.next;
+        }
+
+        this.reverse();
+
+        if(carry == 1){
+            Node newNode = new Node(1);
+            newNode.next = head;
+            head = newNode;
+        }
+    }
+
     // For testing
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();
-        ll.addFirst(1);
-        ll.addFirst(2);
-        ll.addFirst(1);
-        ll.addLast(0);
-        ll.addLast(2);
-        ll.addLast(0);
+        ll.addFirst(9);
+        ll.addFirst(9);
+        ll.addFirst(9);
         ll.print();
-        ll.dutchFlag();
+        ll.addOne();
         ll.print();
     }
 }
