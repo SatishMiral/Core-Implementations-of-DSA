@@ -1,4 +1,4 @@
-package LinkedList;
+// package LinkedList;
 public class LinkedList {
     // Create a Node class to store data and reference to next element(Node)
     // It’s static because we don’t need a LinkedList object to create a Node. 
@@ -145,20 +145,53 @@ public class LinkedList {
         return slow;
     }
 
+    // Dutch National Flag Algorithm (Sort 0s, 1s and 2s)
+    public void dutchFlag(){
+        if(head == null || head.next == null) return;
+
+        Node zeroHead = new Node(-1);
+        Node oneHead = new Node(-1);
+        Node twoHead = new Node(-1);
+
+        Node zero = zeroHead;
+        Node one = oneHead;
+        Node two = twoHead;
+        Node temp = head;
+
+        while (temp != null) {
+            if(temp.data == 0){
+                zero.next = temp;
+                zero = temp;
+            }
+            else if(temp.data == 1){
+                one.next = temp;
+                one = temp;
+            }
+            else{
+                two.next = temp;
+                two = temp;
+            }
+            temp = temp.next;
+        }
+
+        if(one.next != null) zero.next = oneHead.next;
+        one.next = twoHead.next;
+        two.next = null;
+
+        head = zeroHead.next;
+    }
+
     // For testing
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();
-        ll.addFirst(3);
+        ll.addFirst(1);
         ll.addFirst(2);
         ll.addFirst(1);
-        ll.addLast(4);
-        ll.addLast(5);
-        ll.print();  // 1->2->3->4->5->null
-
-        ll.reverse();
-        ll.print();  // 5->4->3->2->1->null
-
-        Node mid = ll.findMid();
-        System.out.println("Middle: " + mid.data);  // Should print 3
+        ll.addLast(0);
+        ll.addLast(2);
+        ll.addLast(0);
+        ll.print();
+        ll.dutchFlag();
+        ll.print();
     }
 }
